@@ -1,29 +1,21 @@
-const arr = [1, 2, 3, 5, 8, 20];
-const trgt = 3;
+const arr = [1, 2, 3, 5, 8, 20, 100, 2000, 2001, 4000];
 
-let mid = Math.floor(arr.length / 2);
-let end = arr.length - 1;
-let start = 0;
+function binarySearch(trgt, start, end) {
+  if (start > end) {
+    return "No value matches";
+  }
 
-function binarySearch(trgt, arr) {
-  if (arr.length < 0) {
-    return;
-  } else if (arr[mid] === trgt) {
-    console.log(`Your value is at index ${mid}`);
-    return;
+  const mid = Math.floor((start + end) / 2);
+
+  if (arr[mid] === trgt) {
+    return `Your value is at index ${mid}`;
   } else if (trgt < arr[mid]) {
-    end = mid;
-    arr = arr.slice(start, end);
-    mid = Math.floor(arr.length / 2);
-    binarySearch(trgt, arr);
+    return binarySearch(trgt, start, mid - 1);
   } else if (trgt > arr[mid]) {
-    start = mid;
-    arr = arr.slice(start, end);
-    mid = Math.floor(arr.length / 2);
-    binarySearch(trgt, arr);
+    return binarySearch(trgt, mid + 1, end);
   }
 }
 
-binarySearch(trgt, arr);
+console.log(binarySearch(4000, 0, arr.length - 1));
 
 // Find out how to return the index of the value in the full array;
